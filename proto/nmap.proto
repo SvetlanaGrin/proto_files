@@ -1,0 +1,30 @@
+syntax="proto3";
+
+package netvuln;
+
+option go_package="netvuln.v1;netvuln";
+
+service NetVulnService {
+    rpc CheckVuln(CheckVulnRequest) returns (CheckVulnResponse);
+}
+message CheckVulnRequest {
+    repeated string targets = 1;
+    int32 tcp_port = 2; 
+}
+message CheckVulnResponse {
+    repeated TargetsResult results = 1;
+}
+message TargetsResult {
+    string target = 1;
+    Service services = 2;
+}
+message Service {
+    string name = 1;
+    string version = 2;
+    int32 tcp_port = 3;
+    repeated Vulnerability vulns = 4;
+}
+message Vulnerability{
+    string identifier = 1;
+    float  cvss_score = 2;
+}
