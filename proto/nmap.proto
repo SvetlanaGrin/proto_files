@@ -9,14 +9,14 @@ service NetVulnService {
 }
 message CheckVulnRequest {
     repeated string targets = 1;
-    int32 tcp_port = 2; 
+    repeated int32 tcp_port = 2; 
 }
 message CheckVulnResponse {
     repeated TargetsResult results = 1;
 }
 message TargetsResult {
     string target = 1;
-    Service services = 2;
+    repeated Service services = 2;
 }
 message Service {
     string name = 1;
